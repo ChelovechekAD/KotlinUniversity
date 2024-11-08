@@ -6,12 +6,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
     private const val BASE_URL = "http://10.0.2.2:8090/"
 
-    val instance: UserServiceApi by lazy {
+    val instance: AuthServiceApi by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        retrofit.create(UserServiceApi::class.java)
+        retrofit.create(AuthServiceApi::class.java)
     }
 }

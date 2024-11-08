@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">lab3</string>
-    <string name="title">Создайте аккаунт</string>
+    <string name="title_reg">Регистрация</string>
+    <string name="title_login">Авторизация</string>
     <string name="login_field_hint">Введите логин</string>
     <string name="email_field_hint">Введите почту</string>
     <string name="password_field_hint">Введите пароль</string>
     <string name="phone_field_hint">Введите номер телефона</string>
-    <string name="button_text">Регистрация</string>
+    <string name="button_reg_text">Регистрация</string>
+    <string name="button_login_text">Войти</string>
+    <string name="to_registration_btn_text">Зарегистрироваться</string>
+    <string name="to_login_btn_text">Авторизоваться</string>
+    <string name="delete_by_login_btn">Удалить по логину</string>
 
 </resources>
