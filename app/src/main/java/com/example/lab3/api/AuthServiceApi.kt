@@ -17,6 +17,6 @@ interface AuthServiceApi {
     @POST("/api/v1/auth/login")
     fun loginUser(@Body data: LoginRequest): Call<UserDTO>
 
-    @DELETE("/api/v1/user/")
-    fun deleteUserByLogin(@Path(value = "userLogin") login: String): Call<Void>
+    @DELETE("/api/v1/user/{userLogin}")
+    fun deleteUserByLogin(@Path("userLogin") login: String): Call<Void>
 }

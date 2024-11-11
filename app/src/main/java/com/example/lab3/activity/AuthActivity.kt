@@ -6,14 +6,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.lab3.MainActivity
 import com.example.lab3.R
 import com.example.lab3.dto.LoginRequest
-import com.example.lab3.dto.RegistrationRequest
 import com.example.lab3.service.AuthServiceService
 
 class AuthActivity : AppCompatActivity() {
