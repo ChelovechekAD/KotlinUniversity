@@ -8,13 +8,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab3.MainActivity
+import com.example.lab3.MyApplication
 import com.example.lab3.R
+import com.example.lab3.configuration.AppDatabase
 import com.example.lab3.dto.LoginRequest
-import com.example.lab3.service.AuthServiceService
+import com.example.lab3.service.AuthService
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 class AuthActivity : AppCompatActivity() {
 
-    private val authServiceService: AuthServiceService = AuthServiceService(this);
+    private val authService: AuthService = AuthService(this);
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,7 @@ class AuthActivity : AppCompatActivity() {
                 Toast.makeText(this, "Поля не заполнены!", Toast.LENGTH_SHORT).show();
             } else {
                 val request = LoginRequest(login, password);
-                authServiceService.loginUser(request);
+                authService.loginUser(request);
             }
         }
 
@@ -43,7 +46,7 @@ class AuthActivity : AppCompatActivity() {
             if (login == "") {
                 Toast.makeText(this, "Поля не заполнены!", Toast.LENGTH_SHORT).show();
             } else {
-                authServiceService.deleteUserByLogin(login)
+                authService.deleteUserByLogin(login)
             }
         }
 

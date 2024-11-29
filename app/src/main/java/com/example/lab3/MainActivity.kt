@@ -9,11 +9,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lab3.activity.AuthActivity
 import com.example.lab3.dto.RegistrationRequest
-import com.example.lab3.service.AuthServiceService
+import com.example.lab3.service.AuthService
 
 class MainActivity : AppCompatActivity() {
 
-    private val authServiceService: AuthServiceService = AuthServiceService(this);
+    private val authService: AuthService = AuthService(this);
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Поля не заполнены!", Toast.LENGTH_SHORT).show();
             } else {
                 val request = RegistrationRequest(login, password, email, phone);
-                authServiceService.regUser(request);
+                authService.regUser(request);
             }
         }
 

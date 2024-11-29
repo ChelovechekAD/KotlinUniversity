@@ -11,5 +11,5 @@
     <string name="to_registration_btn_text">Зарегистрироваться</string>
     <string name="to_login_btn_text">Авторизоваться</string>
     <string name="delete_by_login_btn">Удалить по логину</string>
-
+    <string name="activity_title">Пользователи</string>
 </resources>
