@@ -1,8 +1,11 @@
 package com.example.lab3.service
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
+import com.example.lab3.activity.AuthActivity
+import com.example.lab3.activity.MainActivity
 import com.example.lab3.api.RetrofitClient
 import com.example.lab3.dto.LoginRequest
 import com.example.lab3.dto.RegistrationRequest
@@ -21,19 +24,15 @@ import retrofit2.Response
 @OptIn(DelicateCoroutinesApi::class)
 class AuthService(val context: Context) {
 
-    private val instance = RetrofitClient.instance;
+    private val instance = RetrofitClient.authInstance;
 
     private val userService = UserService(context)
 
-    fun checkAuth() {
-            val sharedPref = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
-            val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
-            if (isLoggedIn) {
-                println(sharedPref.getString("userId", null))
-            } else {
-                println("No auth")
-            }
-
+    fun checkAuth(): Boolean {
+        val sharedPref = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
+        println(isLoggedIn)
+        return isLoggedIn
     }
 
     fun regUser(request: RegistrationRequest) {
@@ -42,17 +41,15 @@ class AuthService(val context: Context) {
             call.enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
-                        Toast.makeText(context, "User created successfully!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "User created successfully!", Toast.LENGTH_SHORT)
+                            .show()
                     } else {
                         proceedErrorResponse(response)
                     }
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Toast.makeText(
-                        context, "Request failed: ${t.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    onFailure(t.message)
                 }
             })
         }
@@ -70,23 +67,26 @@ class AuthService(val context: Context) {
                             context, "User login successfully!",
                             Toast.LENGTH_SHORT
                         ).show()
-                        val message = """
-                        ID: ${userDTO?.id}
-                        Login: ${userDTO?.login}
-                        Email: ${userDTO?.email}
-                        Phone: ${userDTO?.phone}
-                    """.trimIndent()
-                        AlertDialog.Builder(context)
-                            .setTitle("Login Information")
-                            .setMessage(message)
-                            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
-                            .show()
+//                        val message = """
+//                        ID: ${userDTO?.id}
+//                        Login: ${userDTO?.login}
+//                        Email: ${userDTO?.email}
+//                        Phone: ${userDTO?.phone}
+//                    """.trimIndent()
+//                        AlertDialog.Builder(context)
+//                            .setTitle("Login Information")
+//                            .setMessage(message)
+//                            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+//                            .show()
                         if (userDTO != null) {
-                            println(userDTO)
                             val user: User = UserMapper.toEntity(userDTO)
                             println(user)
-                            GlobalScope.launch(Dispatchers.IO){
+                            GlobalScope.launch(Dispatchers.IO) {
                                 userService.saveUserInformation(user)
+                                val intent = Intent(context, MainActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(context, intent, null)
                             }
                         }
                     } else {
@@ -95,10 +95,7 @@ class AuthService(val context: Context) {
                 }
 
                 override fun onFailure(call: Call<UserDTO>, t: Throwable) {
-                    Toast.makeText(
-                        context, "Request failed: ${t.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    onFailure(t.message)
                 }
             })
         }
@@ -120,12 +117,18 @@ class AuthService(val context: Context) {
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Toast.makeText(
-                        context, "Request failed: ${t.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    onFailure(t.message)
                 }
             })
+        }
+    }
+
+    fun logout() {
+        GlobalScope.launch(Dispatchers.IO) {
+            userService.deleteUserFromLocalDB()
+            val intent = Intent(context, AuthActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(context, intent, null)
         }
     }
 
@@ -140,5 +143,12 @@ class AuthService(val context: Context) {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    private fun onFailure(message: String?) {
+        Toast.makeText(
+            context, "Request failed: ${message ?: "Something went wrong!"}",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

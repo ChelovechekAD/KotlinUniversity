@@ -1,4 +1,4 @@
-package com.example.lab3
+package com.example.lab3.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,17 +7,17 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lab3.activity.AuthActivity
+import com.example.lab3.R
 import com.example.lab3.dto.RegistrationRequest
 import com.example.lab3.service.AuthService
 
-class MainActivity : AppCompatActivity() {
+class RegActivity : AppCompatActivity() {
 
     private val authService: AuthService = AuthService(this);
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_reg)
         val label: TextView = findViewById(R.id.textView);
         val loginField: EditText = findViewById(R.id.login_field);
         val emailField: EditText = findViewById(R.id.email_field);

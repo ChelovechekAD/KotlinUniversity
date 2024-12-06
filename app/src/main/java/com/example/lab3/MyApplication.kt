@@ -1,9 +1,9 @@
 package com.example.lab3
 
 import android.app.Application
+import android.util.Log
 import androidx.room.Room
 import com.example.lab3.configuration.AppDatabase
-import com.example.lab3.service.AuthService
 
 class MyApplication : Application() {
 
@@ -12,12 +12,13 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Log.d("MyApplication", "onCreate called")
+
         instance = this
         db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "user_database")
             .fallbackToDestructiveMigration()
             .build()
-        val authService = AuthService(this)
-        authService.checkAuth()
+        Log.d("MyApplication", "Database initialized")
     }
 
     companion object {

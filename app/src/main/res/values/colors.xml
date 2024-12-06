@@ -5,4 +5,5 @@
     <color name="gold">#FFC107</color>
     <color name="background_reg">#141121</color>
     <color name="background_login">#D78A21</color>
+    <color name="app_background_color">#FDFCEB</color>
 </resources>
