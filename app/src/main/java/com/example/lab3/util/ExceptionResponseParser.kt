@@ -14,7 +14,7 @@ class ExceptionResponseParser {
             if (errorBody.isNullOrEmpty()) {
                 return null
             }
-            val gson = RetrofitClient.gson
+            val gson = RetrofitClient.getPreConfiguredGsonBuilder().create()
             return try {
                 gson.fromJson(errorBody, ExceptionResponse::class.java)
             } catch (e: JsonSyntaxException) {

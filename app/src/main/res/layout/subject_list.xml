@@ -12,8 +12,16 @@
         android:paddingRight="30sp"
         android:paddingLeft="30sp"
         android:textSize="20sp"
+        android:textColor="@color/app_color_text_dark"
         android:textStyle="bold"
-        android:background="@android:color/transparent"
+        android:background="@color/title_line_background_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/courseList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp" />
 </LinearLayout>

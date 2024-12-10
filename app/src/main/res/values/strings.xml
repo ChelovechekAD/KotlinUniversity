@@ -20,4 +20,6 @@
     <string name="activity.user_preview.logout_btn">Выйти</string>
     <string name="activity.activity_main.catalog_btn">Каталог</string>
     <string name="activity.activity_main.account_btn">Аккаунт</string>
+    <string name="fragment.course_group_list.group_btn">Оставить заявку</string>
+    <string name="fragment.course_list.course_btn">Просмотреть группы</string>
 </resources>

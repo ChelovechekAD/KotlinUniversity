@@ -5,5 +5,11 @@
     <color name="gold">#FFC107</color>
     <color name="background_reg">#141121</color>
     <color name="background_login">#D78A21</color>
-    <color name="app_background_color">#FDFCEB</color>
+    <color name="app_background_color">#EFE7D6</color>
+    <color name="header_background_color">#AFA16E</color>
+    <color name="title_line_background_color">#E6DFC3</color>
+<!--    <color name="app_btn_color">#8C815A</color>-->
+    <color name="app_btn_color">#AFA16E</color>
+    <color name="app_color_text_dark">#4E3B1B</color>
+    <color name="app_color_text_light">#FAF0DA</color>
 </resources>
