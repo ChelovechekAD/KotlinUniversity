@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingRight="30sp"
+    android:paddingLeft="30sp"
+    android:background="@android:color/transparent"
+    android:paddingBottom="10sp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/courseTitle"
+        android:paddingBottom="10sp"
+        android:paddingTop="10sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        android:textColor="@color/app_color_text_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/courseImage"
+        android:layout_width="match_parent"
+        android:layout_height="201dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/not_found" />
+
+    <TextView
+        android:id="@+id/courseDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_color_text_dark"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:textSize="16sp"
+        android:text="" />
+
+    <Button
+        android:id="@+id/courseBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_color_text_light"
+        android:backgroundTint="@color/app_btn_color"
+        android:textStyle="bold"
+        android:text="@string/fragment.course_list.course_btn"
+        android:textSize="17sp" />
+</LinearLayout>

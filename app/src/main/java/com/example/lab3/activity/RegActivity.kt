@@ -1,21 +1,23 @@
-package com.example.lab3
+package com.example.lab3.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.lab3.dto.CreateUserRequest
-import com.example.lab3.service.UserService
+import com.example.lab3.R
+import com.example.lab3.dto.RegistrationRequest
+import com.example.lab3.service.AuthService
 
-class MainActivity : AppCompatActivity() {
+class RegActivity : AppCompatActivity() {
 
-    private val userService: UserService = UserService(this);
+    private val authService: AuthService = AuthService(this);
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_reg)
         val label: TextView = findViewById(R.id.textView);
         val loginField: EditText = findViewById(R.id.login_field);
         val emailField: EditText = findViewById(R.id.email_field);
@@ -32,9 +34,16 @@ class MainActivity : AppCompatActivity() {
             if (login == "" || email == "" || password == "" || phone == "") {
                 Toast.makeText(this, "Поля не заполнены!", Toast.LENGTH_SHORT).show();
             } else {
-                val request = CreateUserRequest(login, password, email, phone);
-                userService.createUser(request);
+                val request = RegistrationRequest(login, password, email, phone);
+                authService.regUser(request);
             }
+        }
+
+        val linkToLogin: TextView = findViewById(R.id.switch_page_to_login)
+
+        linkToLogin.setOnClickListener {
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
         }
     }
 }

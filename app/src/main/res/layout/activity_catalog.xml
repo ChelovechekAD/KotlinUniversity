@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/app_background_color"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/catalogTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/app_color_text_light"
+        android:textSize="20sp"
+        android:text="@string/activity.activity_catalog.title"
+        android:background="@color/header_background_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subjectList"
+        android:layout_width="409dp"
+        android:layout_height="789dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catalogTitleTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

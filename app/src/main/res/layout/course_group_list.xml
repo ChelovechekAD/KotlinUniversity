@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingBottom="10dp"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/courseGroupHeaderFrame"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/title_line_background_color">
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/groupStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:textSize="17sp"
+        android:textColor="@color/app_color_text_dark"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/groupEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_color_text_dark"
+        android:paddingTop="10dp"
+        android:textSize="17sp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/groupDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_color_text_dark"
+        android:paddingTop="10dp"
+        android:textSize="17sp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="" />
+
+    <Button
+        android:id="@+id/groupBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/app_btn_color"
+        android:textStyle="bold"
+        android:textColor="@color/app_color_text_light"
+        android:textSize="17sp"
+        android:text="@string/fragment.course_group_list.group_btn" />
+</LinearLayout>

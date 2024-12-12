@@ -1,33 +1,41 @@
 package com.example.lab3.service
 
 import android.content.Context
-import android.widget.Toast
-import com.example.lab3.api.RetrofitClient
-import com.example.lab3.dto.CreateUserRequest
-import kotlinx.coroutines.currentCoroutineContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.lab3.MyApplication
+import com.example.lab3.configuration.AppDatabase
+import com.example.lab3.model.User
+import java.util.UUID
 
-class UserService(val context: Context) {
+class UserService(private val context: Context) {
 
-    private val instance = RetrofitClient.instance;
+    private val db: AppDatabase = MyApplication.getDatabase()
 
-    fun createUser(request: CreateUserRequest) {
-        val call = instance.createUser(request);
-        call.enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    Toast.makeText(context, "User saved successfully!", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Server error: ${response.code()}", Toast.LENGTH_SHORT).show()
-                }
-            }
+    suspend fun saveUserInformation(user: User) {
+        db.userDao().getUserById(user.id) ?: db.userDao().insertUser(user)
+        val sharedPref = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putString("userId", user.id.toString())
+        editor.putBoolean("isLoggedIn", true)
+        editor.apply()
+    }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                Toast.makeText(context, "Request failed: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+    suspend fun deleteUserFromLocalDB() {
+        val sharedPref = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        val user = getUserInformation()
+        if (user != null) {
+            db.userDao().deleteUser(user)
+        }
+        sharedPref.edit().clear().apply()
+    }
+
+    suspend fun getUserInformation(): User? {
+        val sharedPref = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        val userIdStr: String? = sharedPref.getString("userId", null)
+        if (userIdStr != null) {
+            val userId: UUID = UUID.fromString(userIdStr)
+            return db.userDao().getUserById(userId)
+        }
+        return null
     }
 
 }
